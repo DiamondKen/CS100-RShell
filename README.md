@@ -10,7 +10,29 @@ This Project is to develop a command shell in C++. We will call it R'Shell (or r
 
 ## Diagram
 
+![UML](./image/UML.png)
+
 ## Classes
+
+1. RShellBase: The base of executable. It contains the basic sturcture and inheritance execute command.
+
+   - RShellExec
+   - RShellConn
+
+2. RShellExec: Read the input command and execute the appropriate command.
+
+   - RExit
+
+3. RShellConn: Read the input from user, determine the connector and execute appropriate Connector.
+
+   - RAnd
+   - ROr
+   - RSeparator
+
+4. RExit: A simple class that exit the command line.
+5. RAnd: A simple class that execute AND command.
+6. ROr: A simple class that execute OR command.
+7. RSeparator: A class that Separate the command from left and right.
 
 ## Prototypes
 
