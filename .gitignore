@@ -43,3 +43,6 @@ build/googletest/googletest/generated/GTestConfig.cmake
 build/googletest/googletest/generated/GTestConfigVersion.cmake
 helloworld
 .vscode/c_cpp_properties.json
+unit_test
+.vscode/settings.json
+ExecTest

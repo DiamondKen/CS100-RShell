@@ -1,16 +1,12 @@
 #include <iostream>
-#include "ExecTest.h"
+#include "ExecTest.cpp"
 #include "gtest/gtest.h"
 
 using namespace std;
 
-TEST(ExecText, PRINTHELLO) {
-    EXPECT_EQ('Hello World executed by execvp()!', ExecTest());
-}
-
-TEST(ExecText, PRINTtwo) {
-    EXPECT_EQ('Hello World executed by execvp()!', ExecTest());
-}
+TEST(ExecText, PRINTHELLO)
+{
+    EXPECT_EQ('Hello World executed by execvp()!', ExecTest());}
 
 int main(int argc, char **argv)
 {

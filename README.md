@@ -36,16 +36,21 @@ This Project is to develop a command shell in C++. We will call it R'Shell (or r
 
 ## Prototypes
 
+We tried to create a prototype using `fork()`, `waitpid()`, `execvp()` and tried using google test to test the prototype. We created a helloworld program for the prototype to work with. After initiate the prototype program, the google test return failed but with interesting results (Below is the what was shown). We received some explanation about our ExecTest function. Since we can't compare a pointer to a string (the compiler won't allow us to do so), we can't really make the googletest passed. In addition, We added main function into the ExecTest, and it is working as intended(which execute our helloworld). We also added a statement right after our `waitpid()` to further prove it showed that we are waiting for our child process to execute, then we execute our parent process.
+
+![FailedTest](./image/FailedTest.png)
+
+Since we added a main function into our ExecTest, the google test unfortunately can't work, so if we want to make google test work, we need to remove the main function in ExecTest.
+
 ## Development and Testing Roadmap
 
 The Development Roadmap will start at the following steps
 
 1. Build a command base
 2. Read user input
-3. Print error message for invalid input 
+3. Print error message for invalid input
 4. Execute Appropriate commands
 5. Test for the # symbol which is comment don't execute it
 6. Test for && connector
 7. Test for || connector
 8. Test for ; connector
- 
