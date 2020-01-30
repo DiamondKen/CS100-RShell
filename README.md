@@ -46,11 +46,11 @@ Since we added a main function into our ExecTest, the google test unfortunately 
 
 The Development Roadmap will start at the following steps
 
-1. Build a command base
-2. Read user input
-3. Print error message for invalid input
-4. Execute Appropriate commands
-5. Test for the # symbol which is comment don't execute it
-6. Test for && connector
-7. Test for || connector
-8. Test for ; connector
+1. Build a command base <https://github.com/cs100/assignment-kenian/issues/1>
+2. Read user input <https://github.com/cs100/assignment-kenian/issues/2>
+3. Print error message for invalid input <https://github.com/cs100/assignment-kenian/issues/3>
+4. Execute Appropriate commands <https://github.com/cs100/assignment-kenian/issues/4>
+5. Test for the # symbol which is comment don't execute it <https://github.com/cs100/assignment-kenian/issues/5>
+6. Test for && connector <https://github.com/cs100/assignment-kenian/issues/6>
+7. Test for || connector <https://github.com/cs100/assignment-kenian/issues/7>
+8. Test for ; connector <https://github.com/cs100/assignment-kenian/issues/8>
