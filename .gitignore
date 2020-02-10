@@ -46,3 +46,7 @@ helloworld
 unit_test
 .vscode/settings.json
 ExecTest
+build/compile_commands.json
+build/googletest/CTestTestfile.cmake
+build/googletest/googlemock/CTestTestfile.cmake
+build/googletest/googletest/CTestTestfile.cmake
