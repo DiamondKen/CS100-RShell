@@ -6,6 +6,7 @@
 class RSeparator : public RShellConn
 {
 public:
+    // RSeparator(RShellBase *lhs, RShellBase *rhs);
     bool execute();
 };
 

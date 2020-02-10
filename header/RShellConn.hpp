@@ -8,7 +8,7 @@ using namespace std;
 class RShellConn : public RShellBase
 {
 public:
-    RShellConn(RShellBase *, RShellBase *) : RShellBase(){};
+    RShellConn(RShellBase *, RShellBase *);
     virtual bool execute();
 
 protected:
