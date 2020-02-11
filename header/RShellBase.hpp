@@ -7,8 +7,13 @@ using namespace std;
 class RShellBase
 {
 public:
-    RShellBase();
+    RShellBase(){};
+    virtual ~RShellBase(){};
+    // RShellBase(char *);
     virtual bool execute() = 0;
+
+// protected:
+//     char *command;
 };
 
 #endif // __RSHELLBASE_H__

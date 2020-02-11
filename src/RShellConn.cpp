@@ -1,4 +1,4 @@
-#include "header/RShellConn.hpp"
+#include "../header/RShellConn.hpp"
 
 RShellConn::RShellConn(RShellBase *myLhs, RShellBase *myRhs)
 {

@@ -1,4 +1,11 @@
-#include "header/ROr.hpp"
+#include "../header/ROr.hpp"
+
+
+// ROr::ROr(RShellBase *myLhs, RShellBase *myRhs)
+// {
+//     lhs = myLhs;
+//     rhs = myRhs;
+// }   
 
 bool ROr::execute()
 {
