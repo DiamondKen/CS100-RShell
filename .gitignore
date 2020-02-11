@@ -50,3 +50,7 @@ build/compile_commands.json
 build/googletest/CTestTestfile.cmake
 build/googletest/googlemock/CTestTestfile.cmake
 build/googletest/googletest/CTestTestfile.cmake
+ExecTest
+# googletest
+unit_test
+build/unit_test

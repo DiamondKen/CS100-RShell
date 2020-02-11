@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string.h>
 
-RShellExec::RShellExec(char *command)
+bool RShellExec::execute()
 {
     pid_t pid = fork();
     int status;
@@ -22,7 +22,7 @@ RShellExec::RShellExec(char *command)
     }
     else if (pid == 0)
     {
-        // char *exec = strdup(command->c_str());
+        // char *exec = strdup(&command->c_str());
         // command = const_cast<char*>(command->c_str());
         char *argv_list[] = {command, NULL};
         execvp(argv_list[0], argv_list);

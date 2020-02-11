@@ -10,10 +10,15 @@ using namespace std;
 class RShellExec : public RShellBase
 {
 public:
-    RShellExec(char*);
+    // RShellExec():;
+    RShellExec(char *myCommand)
+    {
+        command = myCommand;
+    }
     virtual bool execute();
 
 private:
+    char *command;
     vector<string> flags;
 };
 

@@ -6,12 +6,12 @@
 TEST(smclTest, smclTestwithtwo)
 {
     // char test_val; 
-    char test_val1 = "ls";
-    char test_val2 = "echo UwU";
-    RShellExec *test1 = new RShellExec(test_val[0]);
-    RShellExec *test2 = new RShellExec(test_val[1]);
+    char *test_val1 = "echo";
+    char *test_val2 = "ls";
+    RShellExec *test1 = new RShellExec(test_val1);
+    RShellExec *test2 = new RShellExec(test_val2);
     // testContainer[0] = new RShellBase(test_val[0]);
-    RSeparator::RShellConn *test = new RSeparator::RShellConn(test1,test2);
+    RSeparator *test = new RSeparator(test2,test1);
     EXPECT_TRUE(test->execute());
      
 }

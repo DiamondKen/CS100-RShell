@@ -8,10 +8,15 @@ using namespace std;
 class RShellConn : public RShellBase
 {
 public:
-    RShellConn(){};
-    RShellConn(RShellBase *, RShellBase *);
+    // RShellConn(){};
+    RShellConn(RShellBase *myLhs, RShellBase *myRhs)
+    {
+        lhs = myLhs;
+        rhs = myRhs;
+    }
+
     // ~RShellConn(){};
-    virtual bool execute();
+    virtual bool execute() = 0;
 
 protected:
     RShellBase *lhs;
