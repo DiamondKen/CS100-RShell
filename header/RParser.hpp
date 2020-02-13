@@ -14,13 +14,13 @@ using namespace std;
 class RParser
 {
 public:
-    RParser(string input) { this->input = input; };
+    RParser(char userInput[]) { input = userInput; };
 
     virtual string readInput();
-    virtual string readHash();
-
+    virtual string readHash(queue<char*>);
+    virtual queue<char *> readQuote();
 protected:
-    string input;
+    char *input;
 };
 
 
