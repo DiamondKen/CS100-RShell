@@ -1,4 +1,5 @@
-#include "separatorTest.cpp"
+// #include "separatorTest.cpp"
+#include "RParserTest.cpp"
 // #include "src/RSeparator.cpp"
 
 int main(int argc, char **argv) {

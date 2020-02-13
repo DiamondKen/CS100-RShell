@@ -22,8 +22,6 @@ bool RShellExec::execute()
     }
     else if (pid == 0)
     {
-        // char *exec = strdup(&command->c_str());
-        // command = const_cast<char*>(command->c_str());
         char *argv_list[] = {command, NULL};
         execvp(argv_list[0], argv_list);
         exit(0);
