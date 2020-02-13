@@ -1,7 +1,7 @@
 #ifndef  _REXIT_TEST_CPP__
 #define  _REXIT_TEST_CPP__
 
-#include "../src/RExit.h"
+#include "../src/RExit.hpp"
 #include "gtest/gtest.h"
 
 TEST(RExitTest, RExitExecute)
