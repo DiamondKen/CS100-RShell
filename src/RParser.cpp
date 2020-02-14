@@ -179,7 +179,7 @@ queue<char *> RParser::readHash(queue<char *> quoteContainer)
     char hashDemli[] = "#";
     queue<char *> tempContainer;
     queue<char *> hashContainer;
-    while (quoteContainer.size() != 0)ls
+    while (quoteContainer.size() != 0)
     {
         // combine quotation with the sentence
         if (quoteContainer.front() == "\"")
