@@ -11,14 +11,14 @@ class RShellExec : public RShellBase
 {
 public:
     // RShellExec():;
-    RShellExec(char *myCommand)
+    RShellExec(const char *myCommand)
     {
         command = myCommand;
     }
     virtual bool execute();
 
 private:
-    char *command;
+    const char *command;
     vector<string> flags;
 };
 

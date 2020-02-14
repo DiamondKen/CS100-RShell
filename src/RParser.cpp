@@ -5,46 +5,137 @@
 
 using namespace std;
 
-string RParser::readInput()
+queue<RShellBase*> RParser::warpCommand(queue<char *> container)
 {
-
-    char delimiterQuote[] = "\"";
-    char s[] = "echo \"lol && ls && echo 123\"";
-    char *copy = strdup(s);
-    char delimiter[] = " &|;";
-
-    size_t pos = 0;
-    queue<char *> container;
-    string ret = "";
-    char *token = strtok(s, delimiter);
-    while (token)
+    queue<RShellBase *> warpExec;
+    string command = "";
+    while (container.size() != 0)
     {
-        container.push(token);
-        if (copy[token - s + strlen(token)] == '&')
+        if (container.front() == "&")
         {
-            container.push("&");
+            container.pop();
+            string ret = "";
+            while (container.front() != "&" || container.front() != "|" || container.front() != ";" || container.size() != 0)
+            {
+                ret += container.front();
+                container.pop();
+            }
+            RShellExec *retExe = new RShellExec(ret.c_str());
+            RAnd *andExe = new RAnd(warpExec.front(), retExe);
+            warpExec.pop();
+            warpExec.push(andExe);
         }
-        else if (copy[token - s + strlen(token)] == '|')
+        else if (container.front() == "|")
         {
-            container.push("|");
+            container.pop();
+            string ret = "";
+            while (container.front() != "&" || container.front() != "|" || container.front() != ";" || container.size() != 0)
+            {
+                ret += container.front();
+                container.pop();
+            }
+            RShellExec *retExe = new RShellExec(ret.c_str());
+            RAnd *andExe = new RAnd(warpExec.front(), retExe);
+            warpExec.pop();
+            warpExec.push(andExe);
         }
-        else if (copy[token - s + strlen(token)] == ';')
+        else if (container.front() == ";")
         {
-            container.push(";");
+            container.pop();
+            string ret = "";
+            while (container.front() != "&" || container.front() != "|" || container.front() != ";" || container.size() != 0)
+            {
+                ret += container.front();
+                container.pop();
+            }
+            RShellExec *retExe = new RShellExec(ret.c_str());
+            RAnd *andExe = new RAnd(warpExec.front(), retExe);
+            warpExec.pop();
+            warpExec.push(andExe);
         }
-
-        token = strtok(NULL, delimiter);
+        else
+        {
+            command += container.front();
+            RShellExec *exe = new RShellExec(command.c_str());
+            warpExec.push(exe);
+        }
     }
-
-    return ret;
+    
+    return warpExec;
 }
 
-string RParser::readHash(queue<char *> quoteContainer)
+queue<char *> RParser::readInput(queue<char *> hashContainer)
+{
+    queue<char *> secondContainer;
+    queue<char *> finalContainer;
+    queue<char *> execContinaer;
+    char delimiter[] = "&|;";
+    char space[] = " ";
+
+    // Add &,|,;
+    while (hashContainer.size() != 0)
+    {
+        if (hashContainer.front()[0] = '"')
+        {
+            secondContainer.push(hashContainer.front());
+            hashContainer.pop();
+        }
+        else
+        {
+            char *command = strdup(hashContainer.front());
+            char *copy = strdup(hashContainer.front());
+            char *token = strtok(command, delimiter);
+            while (token)
+            {
+                secondContainer.push(token);
+                if (copy[token - command + strlen(token)] == '&')
+                {
+                    secondContainer.push("&");
+                }
+                else if (copy[token - command + strlen(token)] == '|')
+                {
+                    secondContainer.push("|");
+                }
+                else if (copy[token - command + strlen(token)] == ';')
+                {
+                    secondContainer.push(";");
+                }
+                token = strtok(NULL, delimiter);
+            }
+        }
+    }
+
+    while (secondContainer.size() != 0)
+    {
+        if (secondContainer.front()[0] = '"')
+        {
+            finalContainer.push(secondContainer.front());
+            secondContainer.pop();
+        }
+        else
+        {
+            char *command = strdup(hashContainer.front());
+            char *token = strtok(command, space);
+            while (token)
+            {
+                secondContainer.push(token);
+                token = strtok(NULL, delimiter);
+            }
+        }
+    }
+
+    return finalContainer;
+}
+
+queue<char *> RParser::readHash(queue<char *> quoteContainer)
 {
     // new queue for hashContainer
+    char hashDemli[] = "#";
+    queue<char *> tempContainer;
     queue<char *> hashContainer;
     while (quoteContainer.size() != 0)
     {
+        // combine quotation with the sentence
         if (quoteContainer.front() == "\"")
         {
             string ret = "";
@@ -56,13 +147,33 @@ string RParser::readHash(queue<char *> quoteContainer)
                 quoteContainer.pop();
             }
             char *charArray = strcpy(new char[ret.length() + 1], ret.c_str());
-            hashContainer.push(charArray);
+            tempContainer.push(charArray);
         }
     }
 
-    char hashDemli[] = "#";
+    // check hash symbol
+    while (tempContainer.size() != 0)
+    {
+        if (tempContainer.front()[0] = '"')
+        {
+            hashContainer.push(tempContainer.front());
+            tempContainer.pop();
+            // continue;
+        }
+        else if (strchr(tempContainer.front(), '#'))
+        {
+            string ret = tempContainer.front();
+            char *pos = strchr(tempContainer.front(), '#');
+            ret = ret.substr(0, pos - tempContainer.front() + 1);
+            char *cutToken = strcpy(new char[ret.length() + 1], ret.c_str());
+            hashContainer.push(cutToken);
+            break;
+        }
 
-    return ret;
+        hashContainer.push(tempContainer.front());
+        tempContainer.pop();
+    }
+    return hashContainer;
 }
 
 queue<char *> RParser::readQuote()

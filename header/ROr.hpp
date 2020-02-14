@@ -6,6 +6,7 @@
 class ROr : public RShellConn
 {
 public:
+    ROr(RShellBase *myLhs, RShellBase *myRhs) : RShellConn{myLhs, myRhs} {};
     // ROr(RShellBase *, RShellBase *);
     bool execute();
 };

@@ -6,9 +6,9 @@
 class RAnd : public RShellConn
 {
 public:
+    RAnd(RShellBase *myLhs, RShellBase *myRhs) : RShellConn{myLhs, myRhs} {};
     // RAnd(RShellBase *, RShellBase *);
     bool execute();
-    
 };
 
 #endif // RAND_H
