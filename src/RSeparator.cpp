@@ -9,5 +9,6 @@
 
 bool RSeparator::execute()
 {
-    return lhs->execute() && rhs->execute();
+    lhs->execute();
+    return rhs->execute();
 }

@@ -1,5 +1,9 @@
-// #include "separatorTest.cpp"
+// #include "RSeparatorTest.cpp"
 #include "RParserTest.cpp"
+#include "ROrTest.cpp"
+#include "RAndTest.cpp"
+// #include "RExitTest.cpp"
+#include "RSeparatorTest.cpp"
 // #include "src/RSeparator.cpp"
 
 int main(int argc, char **argv) {

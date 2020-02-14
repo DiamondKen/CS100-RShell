@@ -7,7 +7,10 @@ class RExit : public RShellExec
 {
 public:
     RExit();
-    bool execute();
+    bool execute()
+    {
+        exit(0);
+    };
 };
 
 #endif // REXIT_H

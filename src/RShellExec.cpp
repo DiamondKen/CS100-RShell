@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <iostream>
 #include <string.h>
+#include "../header/RExit.hpp"
 
 bool RShellExec::execute()
 {
@@ -36,6 +37,10 @@ bool RShellExec::execute()
     }
 
     waitpid(pid, &status, 0);
+    if(strdup(realCommand) == "exit")
+    {
+        exit(0);
+    }
 }
 
 void RShellExec::flagDivider()

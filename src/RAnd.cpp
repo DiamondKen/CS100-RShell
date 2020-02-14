@@ -1,6 +1,5 @@
 #include "../header/RAnd.hpp"
 
-
 // RAnd::RAnd(RShellBase *myLhs, RShellBase *myRhs)
 // {
 //     lhs = myLhs;
@@ -9,7 +8,7 @@
 
 bool RAnd::execute()
 {
-    if(lhs->execute())
+    if (lhs->execute())
     {
         return rhs->execute();
     }
@@ -18,5 +17,3 @@ bool RAnd::execute()
         return false;
     }
 }
-     
-        
