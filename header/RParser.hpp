@@ -20,10 +20,11 @@ class RParser
 {
 public:
     RParser(char userInput[]) { input = userInput; };
+    virtual bool execCommand(queue<RShellBase *>);
     virtual queue<char *> readQuote();
     virtual queue<char *> readHash(queue<char *>);
     virtual queue<char *> readInput(queue<char *>);
-    virtual queue<RShellBase*> warpCommand(queue<char *>);
+    virtual queue<RShellBase *> warpCommand(queue<char *>);
 
 protected:
     char *input;

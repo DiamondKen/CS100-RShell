@@ -13,7 +13,7 @@ public:
     {
         lhs = myLhs;
         rhs = myRhs;
-    }
+    };
 
     // ~RShellConn(){};
     virtual bool execute() = 0;

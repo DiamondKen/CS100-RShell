@@ -12,6 +12,7 @@
 
 bool RShellExec::execute()
 {
+    flagDivider();
     pid_t pid = fork();
     int status;
 
@@ -22,10 +23,34 @@ bool RShellExec::execute()
     }
     else if (pid == 0)
     {
-        char *argv_list[] = {command, NULL};
+        char *argv_list[flags.size() + 2];
+        argv_list[0] = realCommand;
+        for(int i = 1; i< flags.size() + 2; i++)
+        {
+            argv_list[i] = flags.front();
+            flags.pop();
+        }
+        argv_list[flags.size() + 2] = NULL;
         execvp(argv_list[0], argv_list);
         exit(0);
     }
 
     waitpid(pid, &status, 0);
+}
+
+void RShellExec::flagDivider()
+{
+    char *commandDupli = strdup(command);
+    char *theFlag = strtok(commandDupli, " ");
+    while (theFlag != NULL)
+    {
+        flags.push(theFlag);
+        theFlag = strtok(NULL, " ");   
+    }
+    realCommand = flags.front();
+    if(realCommand == "echo")
+    {
+        
+    }
+    flags.pop();
 }
