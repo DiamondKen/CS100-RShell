@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../../src/RSeparator.cpp"
+#include "../src/RSeparator.cpp"
 #include <cstring>
 
 TEST(smclTest, smclTestwithtwo)

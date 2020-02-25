@@ -39,19 +39,25 @@ bool RParser::execCommand(queue<RShellBase *> container)
 queue<RShellBase *> RParser::warpCommand(queue<char *> container)
 {
     queue<RShellBase *> warpExec;
-    string command = "";
+    // string command = "";
     while (container.size() != 0)
     {
         char *tempPtr = strdup(container.front());
+        // command = "";
         if (strchr(tempPtr, '&'))
         {
             container.pop();
-            tempPtr = strdup(container.front());
+            // tempPtr = strdup(container.front());
             string ret = "";
-            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';') )
+            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
             {
+                tempPtr = strdup(container.front());
                 ret += tempPtr;
                 container.pop();
+                if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
+                {
+                    ret += " ";
+                }
             }
             RShellExec *retExe = new RShellExec(ret.c_str());
             RAnd *andExe = new RAnd(warpExec.front(), retExe);
@@ -61,44 +67,57 @@ queue<RShellBase *> RParser::warpCommand(queue<char *> container)
         else if (strchr(tempPtr, '|'))
         {
             container.pop();
-            tempPtr = strdup(container.front());
+            // tempPtr = strdup(container.front());
             string ret = "";
-            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';') )
+            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
             {
+                tempPtr = strdup(container.front());
                 ret += tempPtr;
                 container.pop();
+                if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
+                {
+                    ret += " ";
+                }
             }
             RShellExec *retExe = new RShellExec(ret.c_str());
-            RAnd *andExe = new RAnd(warpExec.front(), retExe);
+            ROr *orExe = new ROr(warpExec.front(), retExe);
             warpExec.pop();
-            warpExec.push(andExe);
+            warpExec.push(orExe);
         }
         else if (strchr(tempPtr, ';'))
         {
             container.pop();
-            tempPtr = strdup(container.front());
+            // tempPtr = strdup(container.front());
             string ret = "";
-            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';') )
+            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
             {
+                tempPtr = strdup(container.front());
                 ret += tempPtr;
                 container.pop();
+                if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
+                {
+                    ret += " ";
+                }
             }
             RShellExec *retExe = new RShellExec(ret.c_str());
-            RAnd *andExe = new RAnd(warpExec.front(), retExe);
+            RSeparator *sepExe = new RSeparator(warpExec.front(), retExe);
             warpExec.pop();
-            warpExec.push(andExe);
+            warpExec.push(sepExe);
         }
         else
         {
-            
-            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';') )
+            string ret = "";
+            while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
             {
                 tempPtr = strdup(container.front());
-                command += tempPtr;
-                command += " ";
+                ret += tempPtr;
                 container.pop();
+                if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
+                {
+                    ret += " ";
+                }
             }
-            RShellExec *exe = new RShellExec(command.c_str());
+            RShellExec *exe = new RShellExec(ret.c_str());
             warpExec.push(exe);
         }
     }
@@ -185,11 +204,9 @@ queue<char *> RParser::readHash(queue<char *> quoteContainer)
         if (quoteContainer.front() == "\"")
         {
             string ret = "";
-            ret += quoteContainer.front();
             quoteContainer.pop();
             ret += quoteContainer.front();
             quoteContainer.pop();
-            ret += quoteContainer.front();
             quoteContainer.pop();
             char *charArray = strcpy(new char[ret.length() + 1], ret.c_str());
             tempContainer.push(charArray);

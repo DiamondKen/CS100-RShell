@@ -6,10 +6,11 @@
 class RExit : public RShellExec
 {
 public:
-    RExit();
+    RExit() : RShellExec("exit(0)"){};
     bool execute()
     {
         exit(0);
+        return false;
     };
 };
 

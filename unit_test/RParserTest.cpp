@@ -1,7 +1,7 @@
 
 #include <gtest/gtest.h>
 
-#include "../../src/RParser.cpp"
+#include "../src/RParser.cpp"
 
 TEST(parserTest, parsetTestRandom)
 {

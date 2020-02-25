@@ -2,6 +2,7 @@
 #include "../header/RShellBase.hpp"
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -24,22 +25,45 @@ bool RShellExec::execute()
     }
     else if (pid == 0)
     {
-        char *argv_list[flags.size() + 2];
+        int size = flags.size();
+        char *argv_list[size + 2];
         argv_list[0] = realCommand;
-        for(int i = 1; i< flags.size() + 2; i++)
+        for (int i = 1; i < size + 2; i++)
         {
             argv_list[i] = flags.front();
             flags.pop();
         }
-        argv_list[flags.size() + 2] = NULL;
+        argv_list[size + 1] = NULL;
+        if (strcmp(realCommand,"exit") == 0)
+        {
+            exit(0);
+        }
         execvp(argv_list[0], argv_list);
-        exit(0);
+        cout << "Error: command failed" << endl;
+        exit(-1);
     }
 
     waitpid(pid, &status, 0);
-    if(strdup(realCommand) == "exit")
+    int exitStatus = WEXITSTATUS(status);
+    if(exitStatus == -1)
+    {
+        return false;
+    }
+    if (strcmp(realCommand,"exit") == 0)
     {
         exit(0);
+    }
+    if(strcmp(realCommand,"test") == 0)
+    {
+        if (this->execute() == false)
+        {
+            cout <<"(False)" << endl;
+        }
+        else
+        {
+            cout << "(True)" << endl;
+        }
+
     }
 }
 
@@ -49,13 +73,18 @@ void RShellExec::flagDivider()
     char *theFlag = strtok(commandDupli, " ");
     while (theFlag != NULL)
     {
+        // if(theFlag[0] == '"')
+        // {
+        //     theFlag[0] = "";
+        // }
         flags.push(theFlag);
-        theFlag = strtok(NULL, " ");   
+        theFlag = strtok(NULL, " ");
     }
     realCommand = flags.front();
-    if(realCommand == "echo")
-    {
-        
-    }
     flags.pop();
+}
+
+bool RShellExec::testFileDir()
+{
+    
 }
