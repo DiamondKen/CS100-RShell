@@ -6,7 +6,7 @@ This Project is done by Shuang Zhou (SID: 862137762) and Chenyue lin (SID: 86214
 
 ## Introduction
 
-This Project is to develop a command shell in C++. We will call it R'Shell (or rshell for short). This program is able to peforming printing a command prompt, read input from the user, execute appropriate commands, work with the connectors && || ; and repeat until an exit command is executed.
+This Project is to develop a command shell in C++. We will call it R'Shell (or rshell for short). This program is able to peforming printing a command prompt, read input from the user, execute appropriate commands, work with the connectors && || ; and repeat until an exit command is executed. And we can test the path is exist or not. And the program use parenthesis will judge which command will be execute first to decide the priority. 
 
 ## Diagram
 
@@ -22,6 +22,7 @@ This Project is to develop a command shell in C++. We will call it R'Shell (or r
 2. RShellExec: Read the input command and execute the appropriate command.
 
    - RExit
+   - RParse
 
 3. RShellConn: Read the input from user, determine the connector and execute appropriate Connector.
 
@@ -33,7 +34,7 @@ This Project is to develop a command shell in C++. We will call it R'Shell (or r
 5. RAnd: A simple class that execute AND command.
 6. ROr: A simple class that execute OR command.
 7. RSeparator: A class that Separate the command from left and right.
-
+8. RParse: A class that parse the user input command to decide which command need to execute. 
 ## Prototypes
 
 We tried to create a prototype using `fork()`, `waitpid()`, `execvp()` and tried using google test to test the prototype. We created a helloworld program for the prototype to work with. After initiate the prototype program, the google test return failed but with interesting results (Below is the what was shown). We received some explanation about our ExecTest function. Since we can't compare a pointer to a string (the compiler won't allow us to do so), we can't really make the googletest passed. In addition, We added main function into the ExecTest, and it is working as intended(which execute our helloworld). We also added a statement right after our `waitpid()` to further prove it showed that we are waiting for our child process to execute, then we execute our parent process.
