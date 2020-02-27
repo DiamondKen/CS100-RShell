@@ -55,3 +55,5 @@ The Development Roadmap will start at the following steps
 6. Test for && connector <https://github.com/cs100/assignment-kenian/issues/6>
 7. Test for || connector <https://github.com/cs100/assignment-kenian/issues/7>
 8. Test for ; connector <https://github.com/cs100/assignment-kenian/issues/8>
+9. Test for command implementation  <https://github.com/cs100/assignment-kenian/issues/9>
+10. Test for precedence operators <https://github.com/cs100/assignment-kenian/issues/10>
