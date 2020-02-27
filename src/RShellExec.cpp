@@ -10,7 +10,10 @@
 #include <sys/stat.h>
 #include <iostream>
 #include <string.h>
+#include <string>
 #include "../header/RExit.hpp"
+
+using namespace std;
 
 bool RShellExec::execute()
 {
@@ -28,42 +31,130 @@ bool RShellExec::execute()
         int size = flags.size();
         char *argv_list[size + 2];
         argv_list[0] = realCommand;
-        for (int i = 1; i < size + 2; i++)
+
+        // TEST COMMAND
+        if (strcmp(realCommand, "test") == 0 || strcmp(realCommand, "[") == 0)
         {
-            argv_list[i] = flags.front();
-            flags.pop();
+            if (strcmp(realCommand, "test") == 0)
+            {
+                if (flags.size() == 1)
+                {
+                    if (testFileDir("-e", flags.front()))
+                    {
+                        cout << "(True)" << endl;
+                    }
+                    else
+                    {
+                        cout << "(False)" << endl;
+                    }
+                }
+                else
+                {
+                    char *testFlag = flags.front();
+                    flags.pop();
+                    if (testFileDir(testFlag, flags.front()))
+                    {
+                        cout << "(True)" << endl;
+                    }
+                    else
+                    {
+                        cout << "(False)" << endl;
+                    }
+                }
+            }
+            else if (strcmp(realCommand, "[") == 0)
+            {
+                if (flags.size() == 3)
+                {
+                    char *testFlag = flags.front();
+                    flags.pop();
+                    if (testFileDir(testFlag, flags.front()))
+                    {
+                        cout << "(True)" << endl;
+                    }
+                    else
+                    {
+                        cout << "(False)" << endl;
+                    }
+                }
+                else if (flags.size() == 2)
+                {
+                    if (strcmp(flags.front(), "-e") == 0 || strcmp(flags.front(), "-f") == 0 || strcmp(flags.front(), "-d") == 0)
+                    {
+                        char *testFlag = flags.front();
+                        flags.pop();
+                        int length = strlen(flags.front());
+                        string sPath = flags.front();
+                        char *myPath = new char[length];
+                        strcpy(myPath, sPath.substr(0, length - 1).c_str());
+                        if (testFileDir(testFlag, myPath))
+                        {
+                            cout << "(True)" << endl;
+                        }
+                        else
+                        {
+                            cout << "(False)" << endl;
+                        }
+                    }
+                    else
+                    {
+                        if (testFileDir("-e", flags.front()))
+                        {
+                            cout << "(True)" << endl;
+                        }
+                        else
+                        {
+                            cout << "(False)" << endl;
+                        }
+                    }
+                }
+                else if (flags.size() == 1)
+                {
+                    int length = strlen(flags.front());
+                    string sPath = flags.front();
+                    char *myPath = new char[length];
+                    strcpy(myPath, sPath.substr(0, length - 1).c_str());
+                    if (testFileDir("-e", myPath))
+                    {
+                        cout << "(True)" << endl;
+                    }
+                    else
+                    {
+                        cout << "(False)" << endl;
+                    }
+                }
+            }
         }
-        argv_list[size + 1] = NULL;
-        if (strcmp(realCommand,"exit") == 0)
+        else if (strcmp(realCommand, "exit") == 0)
         {
             exit(0);
         }
-        execvp(argv_list[0], argv_list);
-        cout << "Error: command failed" << endl;
-        exit(-1);
+        else
+        {
+            for (int i = 1; i < size + 2; i++)
+            {
+                argv_list[i] = flags.front();
+                flags.pop();
+            }
+            argv_list[size + 1] = NULL;
+
+            // EXIT COMMAND
+
+            execvp(argv_list[0], argv_list);
+            cout << "Error: command failed" << endl;
+            exit(-1);
+        }
     }
 
     waitpid(pid, &status, 0);
     int exitStatus = WEXITSTATUS(status);
-    if(exitStatus == -1)
+    if (exitStatus == -1)
     {
         return false;
     }
-    if (strcmp(realCommand,"exit") == 0)
+    if (strcmp(realCommand, "exit") == 0)
     {
         exit(0);
-    }
-    if(strcmp(realCommand,"test") == 0)
-    {
-        if (this->execute() == false)
-        {
-            cout <<"(False)" << endl;
-        }
-        else
-        {
-            cout << "(True)" << endl;
-        }
-
     }
 }
 
@@ -84,7 +175,32 @@ void RShellExec::flagDivider()
     flags.pop();
 }
 
-bool RShellExec::testFileDir()
+bool RShellExec::testFileDir(char *flag, char *path)
 {
-    
+    struct stat fileStatus;
+    if (strcmp(flag, "-e") == 0)
+    {
+        if (stat(path, &fileStatus) >= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else if (strcmp(flag, "-f") == 0)
+    {
+        if (stat(path, &fileStatus) >= 0)
+        {
+            return S_ISREG(fileStatus.st_mode);
+        }
+    }
+    else if (strcmp(flag, "-d") == 0)
+    {
+        if (stat(path, &fileStatus) >= 0)
+        {
+            return S_ISDIR(fileStatus.st_mode);
+        }
+    }
 }

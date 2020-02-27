@@ -17,9 +17,13 @@ int main()
     {
         cout << "$ ";
         getline(cin, input);
+        if (input == "")
+        {
+            continue;
+        }
         char cInput[input.size() + 1];
         strcpy(cInput, input.c_str());
-        RParser *parser = new RParser(cInput);
-        parser->execCommand(parser->warpCommand(parser->readInput(parser->readHash(parser->readQuote()))));
+        RParser *parser = new RParser();
+        parser->execCommand(parser->warpCommand(parser->readInput(parser->readHash(parser->readQuote(cInput)))));
     }
 }

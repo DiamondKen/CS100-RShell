@@ -5,49 +5,26 @@
 
 using namespace std;
 
-bool RParser::execCommand(queue<RShellBase *> container)
+bool RParser::execCommand(RShellBase *container)
 {
-    if (container.empty())
+    if (container == NULL)
     {
-        return NULL;
+        return false;
     }
-    else
-    {
-        return container.front()->execute();
-    }
+    return container->execute();
 }
 
-// void RParser::cmd()
-// {
-//     while(true)
-//     {
-//         get_input();
-//     }
-// }
-
-// string RParser::get_input() // Get input and check valid parentheses
-// {
-//     cout << "$ ";
-//     string input;
-//     getline(cin, input);
-//     char cInput[input.size() + 1];
-//     strcpy(cInput, input.c_str());
-//     RParser *parser = new RParser(cInput);
-//     parser->execCommand(parser->warpCommand(parser->readInput(parser->readHash(parser->readQuote()))));
-//     return input;
-// }
-queue<RShellBase *> RParser::warpCommand(queue<char *> container)
+RShellBase *RParser::warpCommand(queue<char *> container)
 {
     queue<RShellBase *> warpExec;
-    // string command = "";
+
     while (container.size() != 0)
     {
         char *tempPtr = strdup(container.front());
-        // command = "";
+
         if (strchr(tempPtr, '&'))
         {
             container.pop();
-            // tempPtr = strdup(container.front());
             string ret = "";
             while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
             {
@@ -67,7 +44,6 @@ queue<RShellBase *> RParser::warpCommand(queue<char *> container)
         else if (strchr(tempPtr, '|'))
         {
             container.pop();
-            // tempPtr = strdup(container.front());
             string ret = "";
             while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
             {
@@ -122,7 +98,7 @@ queue<RShellBase *> RParser::warpCommand(queue<char *> container)
         }
     }
 
-    return warpExec;
+    return warpExec.front();
 }
 
 queue<char *> RParser::readInput(queue<char *> hashContainer)
@@ -246,7 +222,7 @@ queue<char *> RParser::readHash(queue<char *> quoteContainer)
     return hashContainer;
 }
 
-queue<char *> RParser::readQuote()
+queue<char *> RParser::readQuote(char *input)
 {
     char delimiter[] = "\"";
 
@@ -274,3 +250,8 @@ queue<char *> RParser::readQuote()
     // }
     return quoteContainer;
 }
+
+// RShellBase *RParser::readPrecedence(queue<char *> container)
+// {
+
+// }

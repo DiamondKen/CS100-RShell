@@ -19,15 +19,13 @@ class RSeparator;
 class RParser
 {
 public:
-    RParser(char userInput[]) { input = userInput; };
-    virtual bool execCommand(queue<RShellBase *>);
-    virtual queue<char *> readQuote();
+    RParser(){};
+    virtual bool execCommand(RShellBase *);
+    virtual queue<char *> readQuote(char *);
     virtual queue<char *> readHash(queue<char *>);
     virtual queue<char *> readInput(queue<char *>);
-    virtual queue<RShellBase *> warpCommand(queue<char *>);
-
-protected:
-    char *input;
+    virtual RShellBase *warpCommand(queue<char *>);
+    // virtual RShellBase *readPrecedence(queue<char *>);
 };
 
 #endif

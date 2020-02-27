@@ -18,7 +18,7 @@ public:
     }
     virtual bool execute();
     void flagDivider();
-    bool testFileDir();
+    bool testFileDir(char *, char *);
 
 protected:
     char *command;
