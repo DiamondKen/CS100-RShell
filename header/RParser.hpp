@@ -23,8 +23,12 @@ public:
     virtual bool execCommand(RShellBase *);
     virtual queue<char *> readQuote(char *);
     virtual queue<char *> readHash(queue<char *>);
-    virtual queue<char *> readInput(queue<char *>);
-    virtual RShellBase *warpCommand(queue<char *>);
+    virtual stack<char *> readOp(string);
+    virtual stack<char *> readStatement(string);
+    virtual stack<char *> readInput(queue<char *>);
+    // virtual RShellBase *warpCommand(queue<char *>);
+    virtual RShellBase *warpCommand(stack<char *>, stack<char *>);
+    virtual queue<char *> readString(string);
     // virtual RShellBase *readPrecedence(queue<char *>);
 };
 
