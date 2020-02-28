@@ -21,9 +21,9 @@ int main()
         {
             continue;
         }
-        char cInput[input.size() + 1];
-        strcpy(cInput, input.c_str());
+        // char cInput[input.size() + 1];
+        // strcpy(cInput, input.c_str());
         RParser *parser = new RParser();
-        parser->execCommand(parser->warpCommand(parser->readInput(parser->readHash(parser->readQuote(cInput)))));
+        parser->execCommand(parser->warpCommand(parser->commandTree(parser->readExpression(parser->readHash(input)))));
     }
 }
