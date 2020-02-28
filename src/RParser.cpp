@@ -62,6 +62,10 @@ RShellBase *RParser::warpCommand(queue<string> postfixET)
             }
         }
     }
+    if(execStack.empty())
+    {
+        return NULL;
+    }
     return execStack.top();
 }
 
@@ -84,7 +88,7 @@ queue<string> RParser::commandTree(queue<string> infixET)
     while (!infixET.empty())
     {
         // whitespace
-        if (infixET.front() == " ")
+        if (infixET.front() == " " || infixET.front() == "")
         {
             infixET.pop();
         }
@@ -106,6 +110,8 @@ queue<string> RParser::commandTree(queue<string> infixET)
         // if it is right brace
         else if (infixET.front() == ")")
         {
+            // Pop right brace in infixEt
+            infixET.pop();
             // pop all to ET
             while (!opStack.empty() && opStack.top() != "(")
             {
@@ -126,7 +132,7 @@ queue<string> RParser::commandTree(queue<string> infixET)
         }
     }
 
-    while(!opStack.empty())
+    while (!opStack.empty())
     {
         postfixET.push(opStack.top());
         opStack.pop();
@@ -356,7 +362,7 @@ queue<string> RParser::readExpression(string input)
 
             if (input[i] == '&' && input[i + 1] == '&')
             {
-                string temp = input.substr(prePos, i);
+                string temp = input.substr(prePos, i - prePos);
                 infixET.push(temp);
                 infixET.push("&&");
                 i++;
@@ -364,7 +370,7 @@ queue<string> RParser::readExpression(string input)
             }
             else if (input[i] == '|' && input[i + 1] == '|')
             {
-                string temp = input.substr(prePos, i);
+                string temp = input.substr(prePos, i - prePos);
                 infixET.push(temp);
                 infixET.push("||");
                 i++;
@@ -372,7 +378,7 @@ queue<string> RParser::readExpression(string input)
             }
             else if (input[i] == ';')
             {
-                string temp = input.substr(prePos, i);
+                string temp = input.substr(prePos, i - prePos);
                 infixET.push(temp);
                 infixET.push(";");
                 prePos = i + 1;
@@ -389,14 +395,17 @@ queue<string> RParser::readExpression(string input)
                     infixET.push(")");
                     prePos = i + 1;
                 }
-                string temp = input.substr(prePos, i);
-                infixET.push(temp);
-                infixET.push(")");
-                prePos = i + 1;
+                else
+                {
+                    string temp = input.substr(prePos, i - prePos);
+                    infixET.push(temp);
+                    infixET.push(")");
+                    prePos = i + 1;
+                }
             }
         }
     }
-    infixET.push(input.substr(prePos, strLen));
+    infixET.push(input.substr(prePos, strLen - prePos));
     return infixET;
 }
 
