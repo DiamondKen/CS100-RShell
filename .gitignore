@@ -55,3 +55,4 @@ build/unit_test
 .vscode/launch.json
 .vscode/tasks.json
 
+ExecTest

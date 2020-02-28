@@ -9,6 +9,7 @@
 #include "RSeparator.hpp"
 #include <string>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -20,16 +21,19 @@ class RParser
 {
 public:
     RParser(){};
-    virtual bool execCommand(RShellBase *);
-    virtual queue<char *> readQuote(char *);
-    virtual queue<char *> readHash(queue<char *>);
-    virtual stack<char *> readOp(string);
-    virtual stack<char *> readStatement(string);
-    virtual stack<char *> readInput(queue<char *>);
-    // virtual RShellBase *warpCommand(queue<char *>);
-    virtual RShellBase *warpCommand(stack<char *>, stack<char *>);
-    virtual queue<char *> readString(string);
-    // virtual RShellBase *readPrecedence(queue<char *>);
+    bool execCommand(RShellBase *);
+    string readHash(string);
+    queue<string> readExpression(string);
+    // vector<string> readOp(string);
+    // vector<string> readStatement(string);
+    // vector<char *> readInput(queue<char *>);
+    queue<string> commandTree(queue<string>);
+    // RShellBase *warpCommand(queue<char *>);
+    RShellBase *warpCommand(queue<string>);
+
+    // RShellBase *readPrecedence(queue<char *>);
+private:
+    bool isConn(string);
 };
 
 #endif
