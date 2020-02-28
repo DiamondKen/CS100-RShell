@@ -42,10 +42,12 @@ bool RShellExec::execute()
                     if (testFileDir("-e", flags.front()))
                     {
                         cout << "(True)" << endl;
+                        exit(0);
                     }
                     else
                     {
                         cout << "(False)" << endl;
+                        exit(EXIT_FAILURE);
                     }
                 }
                 else
@@ -55,10 +57,12 @@ bool RShellExec::execute()
                     if (testFileDir(testFlag, flags.front()))
                     {
                         cout << "(True)" << endl;
+                        exit(0);
                     }
                     else
                     {
                         cout << "(False)" << endl;
+                        exit(EXIT_FAILURE);
                     }
                 }
             }
@@ -71,10 +75,12 @@ bool RShellExec::execute()
                     if (testFileDir(testFlag, flags.front()))
                     {
                         cout << "(True)" << endl;
+                        exit(0);
                     }
                     else
                     {
                         cout << "(False)" << endl;
+                        exit(EXIT_FAILURE);
                     }
                 }
                 else if (flags.size() == 2)
@@ -90,10 +96,12 @@ bool RShellExec::execute()
                         if (testFileDir(testFlag, myPath))
                         {
                             cout << "(True)" << endl;
+                            exit(0);
                         }
                         else
                         {
                             cout << "(False)" << endl;
+                            exit(EXIT_FAILURE);
                         }
                     }
                     else
@@ -101,10 +109,12 @@ bool RShellExec::execute()
                         if (testFileDir("-e", flags.front()))
                         {
                             cout << "(True)" << endl;
+                            exit(0);
                         }
                         else
                         {
                             cout << "(False)" << endl;
+                            exit(EXIT_FAILURE);
                         }
                     }
                 }
@@ -117,10 +127,12 @@ bool RShellExec::execute()
                     if (testFileDir("-e", myPath))
                     {
                         cout << "(True)" << endl;
+                        exit(0);
                     }
                     else
                     {
                         cout << "(False)" << endl;
+                        exit(EXIT_FAILURE);
                     }
                 }
             }
@@ -142,13 +154,13 @@ bool RShellExec::execute()
 
             execvp(argv_list[0], argv_list);
             cout << "Error: command failed" << endl;
-            exit(-1);
+            exit(EXIT_FAILURE);
         }
     }
 
     waitpid(pid, &status, 0);
     int exitStatus = WEXITSTATUS(status);
-    if (exitStatus == -1)
+    if (exitStatus == EXIT_FAILURE)
     {
         return false;
     }
