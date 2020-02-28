@@ -2,11 +2,11 @@
 
 ## Project Information
 
-This Project is done by Shuang Zhou (SID: 862137762) and Chenyue lin (SID: 862142104) in Winter 2020.
+This Project is done by Shuang Zhou (SID: 862137762) and Chengyue lin (SID: 862142104) in Winter 2020.
 
 ## Introduction
 
-This Project is to develop a command shell in C++. We will call it R'Shell (or rshell for short). This program is able to peforming printing a command prompt, read input from the user, execute appropriate commands, work with the connectors && || ; and repeat until an exit command is executed. And we can test the path is exist or not. And the program use parenthesis will judge which command will be execute first to decide the priority. 
+This Project is to develop a command shell in C++. We will call it R'Shell (or rshell for short). This program is able to peforming printing a command prompt, read input from the user, execute appropriate commands, work with the connectors && || ; and repeat until an exit command is executed. And we can test the path director or file is exist or not. And the program use parenthesis will judge which command will be execute first to decide the priority. 
 
 ## Diagram
 
