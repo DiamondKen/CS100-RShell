@@ -1,0 +1,15 @@
+
+echo "Testing multiple commands: "
+
+echo "passed"
+echo successs
+ls
+ls -a
+echo a && echo b || echo c
+echo asd || echo wer
+echo ads ; echo 123
+exit
+
+
+
+
