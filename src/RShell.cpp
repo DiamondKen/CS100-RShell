@@ -27,90 +27,119 @@ int main()
         parser->execCommand(parser->warpCommand(parser->commandTree(parser->readExpression(parser->readHash(input)))));
     }
 }
-// RShellBase *RParser::warpCommand(queue<char *> container)
+// vector<string> RParser::readStatement(string input)
 // {
-//     queue<RShellBase *> warpExec;
-//     queue<char *> statment;
-//     stack<char *> ope;
-
-//     while (container.size() != 0)
+//     vector<string> statement;
+//     int strLen = input.size();
+//     int prePos = 0;
+//     bool isQuote = false;
+//     for (int i = 0; i < strLen; i++)
 //     {
-//         char *tempPtr = strdup(container.front());
-//         if (strchr(tempPtr, '&'))
+//         if (input[i] == '"')
 //         {
-//             container.pop();
-//             string ret = "";
-//             while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
-//             {
-//                 tempPtr = strdup(container.front());
-//                 ret += tempPtr;
-//                 container.pop();
-//                 if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
-//                 {
-//                     ret += " ";
-//                 }
-//             }
-//             RShellExec *retExe = new RShellExec(ret.c_str());
-//             RAnd *andExe = new RAnd(warpExec.front(), retExe);
-//             warpExec.pop();
-//             warpExec.push(andExe);
+//             isQuote = !isQuote;
+//             // for (int j = i; j < strLen; j++)
+//             // {
+//             //     if (input[j] == '"')
+//             //     {
+//             //         // temp string for storage
+//             //         string temp = input.substr(i, j);
+//             //         // conversion between string and char* to store in statement container
+//             //         statement.push(temp);
+//             //         i = j;
+//             //         break;
+//             //     }
+//             // }
 //         }
-//         else if (strchr(tempPtr, '|'))
+//         else if (isQuote == false)
 //         {
-//             container.pop();
-//             string ret = "";
-//             while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
+//             if (input[i] == '&' && input[i + 1] == '&')
 //             {
-//                 tempPtr = strdup(container.front());
-//                 ret += tempPtr;
-//                 container.pop();
-//                 if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
-//                 {
-//                     ret += " ";
-//                 }
+//                 // temp string for storage
+//                 string temp = input.substr(prePos, i - 1);
+//                 // conversion between string and char* to store in statement container
+//                 statement.push_back(temp);
+//                 i++;
+//                 prePos = i + 1;
 //             }
-//             RShellExec *retExe = new RShellExec(ret.c_str());
-//             ROr *orExe = new ROr(warpExec.front(), retExe);
-//             warpExec.pop();
-//             warpExec.push(orExe);
-//         }
-//         else if (strchr(tempPtr, ';'))
-//         {
-//             container.pop();
-
-//             string ret = "";
-//             while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
+//             else if (input[i] == '|' && input[i + 1] == '|')
 //             {
-//                 tempPtr = strdup(container.front());
-//                 ret += tempPtr;
-//                 container.pop();
-//                 if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
-//                 {
-//                     ret += " ";
-//                 }
+//                 // temp string for storage
+//                 string temp = input.substr(prePos, i - 1);
+//                 // conversion between string and char* to store in statement container
+//                 statement.push_back(temp);
+//                 i++;
+//                 prePos = i + 1;
 //             }
-//             RShellExec *retExe = new RShellExec(ret.c_str());
-//             RSeparator *sepExe = new RSeparator(warpExec.front(), retExe);
-//             warpExec.pop();
-//             warpExec.push(sepExe);
-//         }
-//         else
-//         {
-//             string ret = "";
-//             while (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
+//             else if (input[i] == ';')
 //             {
-//                 tempPtr = strdup(container.front());
-//                 ret += tempPtr;
-//                 container.pop();
-//                 if (container.size() != 0 && !(container.front()[0] == '&' || container.front()[0] == '|' || container.front()[0] == ';'))
-//                 {
-//                     ret += " ";
-//                 }
+//                 // temp string for storage
+//                 string temp = input.substr(prePos, i - 1);
+//                 // conversion between string and char* to store in statement container
+//                 statement.push_back(temp);
+//                 prePos = i + 1;
 //             }
-//             RShellExec *exe = new RShellExec(ret.c_str());
-//             warpExec.push(exe);
+//             // else if (input[i] == '(' || input[i] == ')')
+//             // {
+//             //     // if (input[i + 1] == '(' || input[i + 1] == ')')
+//             //     // {
+//             //     //     prePos = i + 2;
+//             //     //     continue;
+//             //     // }
+//             //     // else
+//             //     // {
+//             //     string temp = input.substr(prePos, i - 1);
+//             //     // conversion between string and char* to store in statement container
+//             //     statement.push_back(temp);
+//             //     prePos = i + 1;
+//             //     // }
+//             // }
+//             // else if (input[i] == ' ')
+//             // {
+//             //     continue;
+//             // }
 //         }
 //     }
+//     return statement;
+// }
 
-//     return warpExec.front();
+// vector<string> RParser::readOp(string input)
+// {
+//     int strLen = input.size();
+//     bool inQuote = false;
+//     vector<string> opStack;
+//     for (int i = 0; i < strLen; i++)
+//     {
+//         if (input[i] == '"')
+//         {
+//             inQuote = !inQuote;
+//         }
+//         else if (inQuote == false)
+//         {
+
+//             if (input[i] == '&' && input[i + 1] == '&')
+//             {
+//                 opStack.push_back("&&");
+//                 i++;
+//             }
+//             else if (input[i] == '|' && input[i + 1] == '|')
+//             {
+//                 opStack.push_back("||");
+//                 i++;
+//             }
+//             else if (input[i] == ';')
+//             {
+//                 opStack.push_back(";");
+//             }
+//             else if (input[i] == '(')
+//             {
+//                 opStack.push_back("(");
+//             }
+//             else if (input[i] == ')')
+//             {
+//                 opStack.push_back(")");
+//             }
+//         }
+//     }
+//     return opStack;
 // }
