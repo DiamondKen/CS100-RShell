@@ -1,0 +1,9 @@
+./../rshell < precedence_tests
+
+
+
+
+
+
+
+
