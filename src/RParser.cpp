@@ -62,7 +62,7 @@ RShellBase *RParser::warpCommand(queue<string> postfixET)
             }
         }
     }
-    if(execStack.empty())
+    if (execStack.empty())
     {
         return NULL;
     }
@@ -84,6 +84,7 @@ bool RParser::isConn(string c)
 queue<string> RParser::commandTree(queue<string> infixET)
 {
     stack<string> opStack;
+    // queue<string> tempQueue;
     queue<string> postfixET;
     while (!infixET.empty())
     {
@@ -96,6 +97,11 @@ queue<string> RParser::commandTree(queue<string> infixET)
         // if it is connector
         else if (isConn(infixET.front()))
         {
+            while(!opStack.empty() && isConn(opStack.top()) && opStack.top() != "(")
+            {
+                postfixET.push(opStack.top());
+                opStack.pop();
+            }
             opStack.push(infixET.front());
             infixET.pop();
         }
@@ -130,7 +136,20 @@ queue<string> RParser::commandTree(queue<string> infixET)
             postfixET.push(infixET.front());
             infixET.pop();
         }
+        // if (!tempQueue.empty() && isConn(tempQueue.back()))
+        // {
+        //     while (!tempQueue.empty())
+        //     {
+        //         opStack.push(tempQueue.front());
+        //         tempQueue.pop();
+        //     }
+        // }
     }
+    // while (!opStack.empty())
+    // {
+    //     tempQueue.push(opStack.top());
+    //     opStack.pop();
+    // }
 
     while (!opStack.empty())
     {
