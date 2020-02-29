@@ -1,5 +1,5 @@
-#ifndef __RSHELLCONN_H__
-#define __RSHELLCONN_H__
+#ifndef __RSHELLCONN_HPP__
+#define __RSHELLCONN_HPP__
 
 using namespace std;
 

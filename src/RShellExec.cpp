@@ -1,5 +1,4 @@
 #include "../header/RShellExec.hpp"
-#include "../header/RShellBase.hpp"
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -11,7 +10,7 @@
 #include <iostream>
 #include <string.h>
 #include <string>
-#include "../header/RExit.hpp"
+// #include "../header/RExit.hpp"
 
 using namespace std;
 
@@ -172,17 +171,60 @@ bool RShellExec::execute()
 
 void RShellExec::flagDivider()
 {
-    char *commandDupli = strdup(command);
-    char *theFlag = strtok(commandDupli, " ");
-    while (theFlag != NULL)
+    string temp = string(command);
+    int strLen = temp.size();
+    bool inQuote = false;
+    string ret = "";
+    for (int i = 0; i < strLen; i++)
     {
-        // if(theFlag[0] == '"')
-        // {
-        //     theFlag[0] = "";
-        // }
-        flags.push(theFlag);
-        theFlag = strtok(NULL, " ");
+
+        if (temp[i] == '"')
+        {
+            inQuote = !inQuote;
+        }
+        else if (inQuote == true)
+        {
+            ret += temp[i];
+        }
+        else if (inQuote == false)
+        {
+            if (temp[i] == ' ')
+            {
+                if (ret.find_first_not_of(" ") == string::npos && ret == "")
+                {
+                    ret = "";
+                    // There's a non-space.
+                }
+                else
+                {
+                    char *theFlag = strdup(ret.c_str());
+                    flags.push(theFlag);
+                    ret = "";
+                }
+            }
+            else
+            {
+                ret += temp[i];
+            }
+        }
     }
+    if (ret != "")
+    {
+        char *theFlag = strdup(ret.c_str());
+        flags.push(theFlag);
+        ret = "";
+    }
+    // char *commandDupli = strdup(command);
+    // // char *theFlag = strtok(commandDupli, " ");
+    // while (theFlag != NULL)
+    // {
+    //     // if(theFlag[0] == '"')
+    //     // {
+    //     //     theFlag[0] = "";
+    //     // }
+    //     flags.push(theFlag);
+    //     theFlag = strtok(NULL, " ");
+    // }
     realCommand = flags.front();
     flags.pop();
 }

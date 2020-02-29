@@ -1,5 +1,5 @@
-#ifndef __REXIT_H__
-#define __REXIT_H__
+#ifndef __REXIT_HPP__
+#define __REXIT_HPP__
 
 #include "RShellExec.hpp"
 

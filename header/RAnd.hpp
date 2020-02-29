@@ -1,5 +1,5 @@
-#ifndef __RAND_H__
-#define __RAND_H__
+#ifndef __RAND_HPP__
+#define __RAND_HPP__
 
 #include "RShellConn.hpp"
 

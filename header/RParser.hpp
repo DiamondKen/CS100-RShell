@@ -1,5 +1,5 @@
-#ifndef __RPARSER_H__
-#define __RPARSER_H__
+#ifndef __RPARSER_HPP__
+#define __RPARSER_HPP__
 
 #include "RShellBase.hpp"
 #include "RShellConn.hpp"

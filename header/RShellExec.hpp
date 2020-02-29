@@ -1,5 +1,5 @@
-#ifndef __RSHELLEXEC_H__
-#define __RSHELLEXEC_H__
+#ifndef __RSHELLEXEC_HPP__
+#define __RSHELLEXEC_HPP__
 
 #include "RShellBase.hpp"
 #include <queue>
@@ -19,6 +19,8 @@ public:
     virtual bool execute();
     void flagDivider();
     bool testFileDir(char *, char *);
+    char *getRealCommand() { return realCommand; };
+    queue<char *> getFlags() { return flags; };
 
 protected:
     char *command;

@@ -2,7 +2,6 @@
 #define _REXIT_TEST_CPP__
 
 #include "gtest/gtest.h"
-#include "../src/RExit.cpp"
 
 
 TEST(RExitTest, RExitExecute)

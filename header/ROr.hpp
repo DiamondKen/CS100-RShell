@@ -1,5 +1,5 @@
-#ifndef __ROR_H__
-#define __ROR_H__
+#ifndef __ROR_HPP__
+#define __ROR_HPP__
 
 #include "RShellConn.hpp"
 

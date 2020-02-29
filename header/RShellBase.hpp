@@ -1,5 +1,5 @@
-#ifndef __RSHELLBASE_H__
-#define __RSHELLBASE_H__
+#ifndef __RSHELLBASE_HPP__
+#define __RSHELLBASE_HPP__
 
 // #include <iostream>
 using namespace std;

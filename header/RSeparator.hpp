@@ -1,5 +1,5 @@
-#ifndef __RSEPARATOR_H__
-#define __RSEPARATOR_H__
+#ifndef __RSEPARATOR_HPP__
+#define __RSEPARATOR_HPP__
 
 #include "RShellConn.hpp"
 
