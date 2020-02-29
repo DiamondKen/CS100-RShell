@@ -1,0 +1,15 @@
+
+
+echo "Testing multiple commands: "
+
+mkdir test1
+ls -a
+ls
+echo success
+echo a
+
+echo "Passed"
+
+
+
+exit
