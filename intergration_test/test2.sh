@@ -1,16 +1,11 @@
 #!/bin/bash
 
-echo "Testing multiple commands: "
+echo "Testing single commands: "
 
-cd ..  
-cd ..
-./rshell<<EOF>single_test
-ls -a
-EOF
-
+.././rshell < single_test
 if[$? -eq 0]
 then
 	echo "Passed"
 else
 	echo "Failed"
-fi
+fi	

@@ -1,4 +1,4 @@
-./../rshell < precedence_tests
+./../rshell < precedence_test
 
 
 

@@ -1,3 +1,4 @@
+.././rshell <<EOF
 ls
 ls -a
 echo hello
