@@ -216,3 +216,119 @@ bool RShellExec::testFileDir(char *flag, char *path)
         }
     }
 }
+// vector<string> RParser::readStatement(string input)
+// {
+//     vector<string> statement;
+//     int strLen = input.size();
+//     int prePos = 0;
+//     bool isQuote = false;
+//     for (int i = 0; i < strLen; i++)
+//     {
+//         if (input[i] == '"')
+//         {
+//             isQuote = !isQuote;
+//             // for (int j = i; j < strLen; j++)
+//             // {
+//             //     if (input[j] == '"')
+//             //     {
+//             //         // temp string for storage
+//             //         string temp = input.substr(i, j);
+//             //         // conversion between string and char* to store in statement container
+//             //         statement.push(temp);
+//             //         i = j;
+//             //         break;
+//             //     }
+//             // }
+//         }
+//         else if (isQuote == false)
+//         {
+//             if (input[i] == '&' && input[i + 1] == '&')
+//             {
+//                 // temp string for storage
+//                 string temp = input.substr(prePos, i - 1);
+//                 // conversion between string and char* to store in statement container
+//                 statement.push_back(temp);
+//                 i++;
+//                 prePos = i + 1;
+//             }
+//             else if (input[i] == '|' && input[i + 1] == '|')
+//             {
+//                 // temp string for storage
+//                 string temp = input.substr(prePos, i - 1);
+//                 // conversion between string and char* to store in statement container
+//                 statement.push_back(temp);
+//                 i++;
+//                 prePos = i + 1;
+//             }
+//             else if (input[i] == ';')
+//             {
+//                 // temp string for storage
+//                 string temp = input.substr(prePos, i - 1);
+//                 // conversion between string and char* to store in statement container
+//                 statement.push_back(temp);
+//                 prePos = i + 1;
+//             }
+//             // else if (input[i] == '(' || input[i] == ')')
+//             // {
+//             //     // if (input[i + 1] == '(' || input[i + 1] == ')')
+//             //     // {
+//             //     //     prePos = i + 2;
+//             //     //     continue;
+//             //     // }
+//             //     // else
+//             //     // {
+//             //     string temp = input.substr(prePos, i - 1);
+//             //     // conversion between string and char* to store in statement container
+//             //     statement.push_back(temp);
+//             //     prePos = i + 1;
+//             //     // }
+//             // }
+//             // else if (input[i] == ' ')
+//             // {
+//             //     continue;
+//             // }
+//         }
+//     }
+//     return statement;
+// }
+
+// vector<string> RParser::readOp(string input)
+// {
+//     int strLen = input.size();
+//     bool inQuote = false;
+//     vector<string> opStack;
+//     for (int i = 0; i < strLen; i++)
+//     {
+//         if (input[i] == '"')
+//         {
+//             inQuote = !inQuote;
+//         }
+//         else if (inQuote == false)
+//         {
+
+//             if (input[i] == '&' && input[i + 1] == '&')
+//             {
+//                 opStack.push_back("&&");
+//                 i++;
+//             }
+//             else if (input[i] == '|' && input[i + 1] == '|')
+//             {
+//                 opStack.push_back("||");
+//                 i++;
+//             }
+//             else if (input[i] == ';')
+//             {
+//                 opStack.push_back(";");
+//             }
+//             else if (input[i] == '(')
+//             {
+//                 opStack.push_back("(");
+//             }
+//             else if (input[i] == ')')
+//             {
+//                 opStack.push_back(")");
+//             }
+//         }
+//     }
+//     return opStack;
+// }
