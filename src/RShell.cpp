@@ -10,6 +10,11 @@
 
 using namespace std;
 
+bool has_only_spaces(const std::string &str)
+{
+    return str.find_first_not_of(' ') == str.npos;
+}
+
 int main()
 {
     string input;
@@ -17,10 +22,11 @@ int main()
     {
         cout << "$ ";
         getline(cin, input);
-        if (input == "")
+        if (input == "" || has_only_spaces(input))
         {
             continue;
         }
+
         // char cInput[input.size() + 1];
         // strcpy(cInput, input.c_str());
         RParser *parser = new RParser();
